@@ -7,6 +7,8 @@ import locators.QueryPageLocators;
 import org.openqa.selenium.By;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
+import pages.GoogleMainPO;
+import pages.ResultQueryPO;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,7 +16,7 @@ import java.util.List;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TestExample {
-    SoftAssert softAssert;
+    private SoftAssert softAssert;
 
     @Parameters("browser")
     @BeforeTest
@@ -34,18 +36,22 @@ public class TestExample {
     }
 
     @Test
-    public void testExample() {
-        $x(GoogleMainLocators.INPUT.getPath()).setValue("funny kitten").pressEnter();
-        List<String> resultList = new LinkedList<>();
-        while (resultList.size() < 10) {
-            ElementsCollection listOfResults = $$x(QueryPageLocators.LIST_OF_RESULTS.getPath());
-            for (SelenideElement element : listOfResults) {
-                resultList.add(element.getOwnText());
-            }
-            $(By.id(QueryPageLocators.NEXT_BUTTON_PAGE.getPath())).click();
+    public void verifyTextOfResultQuery() {
+        var query = "funny kitten";
+        var expectedText = "kitten";
+        ResultQueryPO resultQueryPO = new GoogleMainPO()
+                .searchQuery(query)
+                .getAddressComponents();
+        var resultList = new LinkedList<String>();
+        resultList.addAll(resultQueryPO.getAllTextFromTitleLinks());
+        if (resultList.size() < 10) {
+            resultList.addAll(resultQueryPO.
+                    clickOnNextQueryPageButton()
+                    .getAddressComponents()
+                    .getAllTextFromTitleLinks());
         }
-        softAssert.assertTrue(resultList.get(0).toLowerCase().contains("kitten"));
-        softAssert.assertTrue(resultList.get(9).toLowerCase().contains("kitten"));
+        softAssert.assertTrue(resultList.get(0).toLowerCase().contains(expectedText));
+        softAssert.assertTrue(resultList.get(9).toLowerCase().contains(expectedText));
         softAssert.assertAll();
     }
 }
