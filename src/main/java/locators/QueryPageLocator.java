@@ -6,8 +6,10 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum ResultQueryComponentLocators {
-    TITLE_LINK(".//h3");
+public enum QueryPageLocator {
+    LIST_OF_RESULTS("//div[@class = 'g']"),
+    NEXT_BUTTON_PAGE("pnnext"),
+    LOGO("logo");
 
     @NonNull
     private String path;

@@ -1,17 +1,11 @@
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
-import locators.GoogleMainLocators;
-import locators.QueryPageLocators;
-import org.openqa.selenium.By;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 import pages.GoogleMainPO;
 import pages.ResultQueryPO;
 
 import java.util.LinkedList;
-import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
 

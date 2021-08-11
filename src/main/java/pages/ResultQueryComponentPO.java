@@ -1,7 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-import locators.ResultQueryComponentLocators;
+import locators.ResultQueryComponentLocator;
 
 public class ResultQueryComponentPO {
     private SelenideElement titleLink;
@@ -11,7 +11,7 @@ public class ResultQueryComponentPO {
     }
 
     private void initElements(SelenideElement root) {
-        titleLink = root.$x(ResultQueryComponentLocators.TITLE_LINK.getPath());
+        titleLink = root.$x(ResultQueryComponentLocator.TITLE_LINK.getPath());
     }
 
     public String getTitleLinkText() {

@@ -6,10 +6,8 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum QueryPageLocators {
-    LIST_OF_RESULTS("//div[@class = 'g']"),
-    NEXT_BUTTON_PAGE("pnnext"),
-    LOGO("logo");
+public enum GoogleMainLocator {
+    INPUT("//input[@name = 'q']");
 
     @NonNull
     private String path;
